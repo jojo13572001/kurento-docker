@@ -14,4 +14,7 @@ fi
 # Remove ipv6 local loop until ipv6 is supported
 cat /etc/hosts | sed '/::1/d' | tee /etc/hosts > /dev/null
 
-exec /usr/bin/kurento-media-server "$@"
+exec /usr/bin/kurento-media-server "$@" &
+sleep 2
+cd kurento-IPCam-H264
+exec http-server -p 8443
