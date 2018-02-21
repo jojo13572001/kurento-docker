@@ -16,5 +16,6 @@ cat /etc/hosts | sed '/::1/d' | tee /etc/hosts > /dev/null
 
 exec /usr/bin/kurento-media-server "$@" &
 sleep 2
-cd kurento-IPCam-H264
+git clone -b streetlight https://github.com/jojo13572001/kurento-IPCam-H264.git
+cd kurento-IPCam-H264 && bower install --allow-root
 exec http-server -p 8443
