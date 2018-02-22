@@ -1,0 +1,52 @@
+# kubernete.yaml
+apiVersion: extensions/v1beta1 
+kind: Deployment 
+metadata:
+  name: kurento
+spec:
+  replicas: 1 
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0 
+  minReadySeconds: 5
+  template:
+    metadata:
+      labels:
+        name: kurento-server
+    spec:
+      containers:
+      - name: kurento 
+        image: jojo13572001/kurento
+        ports:
+        - containerPort: 30063 
+        - containerPort: 8443
+        volumeMounts:
+        - mountPath: /tmp
+          name: recorder 
+      volumes:
+        - name: recorder 
+          hostPath: 
+            path: /tmp
+---
+apiVersion: v1 
+kind: Service
+metadata:
+  name: kurento 
+  labels:
+    name: kurento-server 
+spec:
+  type: NodePort
+  ports:
+    # the port that this service should serve on
+    - name: port1
+      port: 8443
+      targetPort: 8443
+      nodePort: 30062
+    - name: port2
+      port: 30063 
+      targetPort: 30063 
+      nodePort: 30063
+  selector:
+    name: kurento-server 

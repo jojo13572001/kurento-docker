@@ -25,7 +25,7 @@ RUN apt-get install -y git
 #RUN git clone -b streetlight https://github.com/jojo13572001/kurento-IPCam-H264.git
 #RUN cd kurento-IPCam-H264 && bower install --allow-root
 
-EXPOSE 8888 8443
+EXPOSE 30063 8443
 
 COPY ./entrypoint.sh /entrypoint.sh
 COPY ./healthchecker.sh /healthchecker.sh
