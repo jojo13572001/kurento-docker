@@ -29,6 +29,7 @@ EXPOSE 30063 8443
 
 COPY ./entrypoint.sh /entrypoint.sh
 COPY ./healthchecker.sh /healthchecker.sh
+COPY ./WebRtcEndpoint.conf.ini /etc/kurento/modules/kurento/WebRtcEndpoint.conf.ini
 
 HEALTHCHECK --interval=5m --timeout=3s --retries=1 CMD /healthchecker.sh
 
